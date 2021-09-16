@@ -88,4 +88,7 @@ public class Panier {
 		System.out.println("Total après réduction : " + (total - reduc) + "€");
 	}
 
+	public List<AbstractTool> getToolsList() {
+		return liste;
+	}
 }
