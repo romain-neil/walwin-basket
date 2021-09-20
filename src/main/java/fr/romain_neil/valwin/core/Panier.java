@@ -20,10 +20,20 @@ public class Panier {
 
 	public Panier() {
 		liste = new ArrayList<>();
+		total = 0;
+		reduc = 0;
 	}
 
 	public void addTool(AbstractTool tool) {
 		liste.add(tool);
+	}
+
+	public double getTotal() {
+		return total;
+	}
+
+	public double getReduc() {
+		return reduc;
 	}
 
 	/**
