@@ -1,10 +1,7 @@
 package fr.romain_neil.valwin.core;
 
-import fr.romain_neil.valwin.core.tools.Meuleuse;
-import fr.romain_neil.valwin.core.tools.Perceuse;
-import fr.romain_neil.valwin.core.tools.Ponceuse;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import fr.romain_neil.valwin.core.tools.*;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,6 +24,42 @@ class PanierTest {
 	}
 
 	@Test
+	void reduc1() {
+		ScieCirculaire scie = new ScieCirculaire(Brand.Parkside);
+		Ponceuse ponceuse = new Ponceuse(Brand.Parkside);
+
+		panier.addTool(scie);
+		panier.addTool(ponceuse);
+
+		panier.calcPrice();
+
+		double expectedPrice = scie.getPrice() + ponceuse.getPrice();
+		double priceAfterReduction = expectedPrice * 0.8;
+
+		assertEquals(expectedPrice, panier.getTotal());
+		assertEquals(priceAfterReduction, expectedPrice - panier.getReduc());
+	}
+
+	@Test
+	void reduc2() {
+		Meuleuse meuleuse = new Meuleuse(Brand.Parkside);
+		Perceuse perceuse = new Perceuse(Brand.Parkside);
+		Visseuse visseuse = new Visseuse(Brand.Parkside);
+
+		panier.addTool(meuleuse);
+		panier.addTool(perceuse);
+		panier.addTool(visseuse);
+
+		panier.calcPrice();
+
+		double expectedPrice = (meuleuse.getPrice() + perceuse.getPrice() + visseuse.getPrice());
+		double priceAfterReduction = expectedPrice * 0.7;
+
+		assertEquals(expectedPrice, panier.getTotal());
+		assertEquals(priceAfterReduction, expectedPrice - panier.getReduc());
+	}
+
+	@Test
 	void reduc3() {
 		Meuleuse m1 = new Meuleuse(Brand.Parkside);
 		Meuleuse m2 = new Meuleuse(Brand.Hilti);
@@ -40,7 +73,7 @@ class PanierTest {
 		double priceAfterReduction = expectedPrice * 0.9;
 
 		assertEquals(expectedPrice, panier.getTotal());
-		assertEquals(priceAfterReduction, panier.getReduc());
+		assertEquals(priceAfterReduction, expectedPrice - panier.getReduc());
 	}
 
 	@Test
@@ -60,7 +93,7 @@ class PanierTest {
 		double priceAfterReduction = expectedPrice * 0.6;
 
 		assertEquals(expectedPrice, panier.getTotal());
-		assertEquals(priceAfterReduction, panier.getReduc());
+		assertEquals(priceAfterReduction, expectedPrice - panier.getReduc());
 	}
 
 }
