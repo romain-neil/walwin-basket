@@ -12,8 +12,8 @@ class PanierTest {
 
 	private static Panier panier;
 
-	@BeforeAll
-	static void setPanier() {
+	@BeforeEach
+	void setPanier() {
 		panier = new Panier();
 	}
 
